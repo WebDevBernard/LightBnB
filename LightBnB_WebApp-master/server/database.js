@@ -91,7 +91,7 @@ exports.getAllReservations = getAllReservations;
 /**
  * Get all properties.
  * @param {{}} options An object containing query options.
- * @param {*} limit The number of results to return.
+ * @param {*} limit The number of results to return.s
  * @return {Promise<[{}]>}  A promise to the properties.
  */
 const getAllProperties = function(options, limit = 10) {
@@ -105,8 +105,10 @@ const getAllProperties = function(options, limit = 10) {
   `;
 
   // 3
+
+  // $n gets dynamically updated, first param is $1
   if (options.city) {
-    queryParams.push(`%${options.city}%`);
+    queryParams.push(`%${options.city}%`);  // % for LIKE clause
     queryString += `WHERE city LIKE $${queryParams.length} `;
   }
   if (options.owner_id) {
